@@ -18,9 +18,11 @@ body {
 }
 
 header {
-  margin: 1rem  auto;
+  margin: 0  auto;
+  padding:1.5rem 0;
   display:flex;
   align-items: center;
+  background-color: white;
 
 }
 
@@ -99,7 +101,9 @@ form label {
   margin-top: 4px;
   accent-color: white;
 }
-.is-read {
+
+
+.readStatus {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -124,9 +128,9 @@ form label {
 
 /*Book container */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 0 15px;
+  max-width: 80%;
 }
 
 .books {
@@ -135,14 +139,22 @@ form label {
 }
 
 .books .card {
-  position: relative;
-  background-color: #fff;
-  margin: 10px;
-  padding: 20px 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position:relative;
+  border-radius:12px;
+  margin: 2rem 1rem;
+  gap:20px;
+  padding:20px;
+  background-color: white; 
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+
 }
 
+.button-group{
+  margin:0 auto;
+}
 
 .delete {
   position: absolute;
@@ -157,6 +169,10 @@ form label {
 
 .delete:hover {
   color: #000;
+}
+.description > *:not(:last-child) {
+  border-bottom: 1px solid black;
+  margin-bottom:1rem;
 }
 
 
