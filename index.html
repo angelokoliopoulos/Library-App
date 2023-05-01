@@ -21,9 +21,22 @@
         Add a Book
       </button>
     </header>
-    <div class="container">
-      <div  class="books"></div>
+<div class="container">
+  <div  class="books">
+    <!-- <div class="card">
+      <div class="description">
+        <h2>Title: 2424</h2>
+        <h3>Author: 242</h3>
+        <p>Pages: 4242</p>
+        <p>Read Status:</p>
     </div>
+    <div class="button-group">
+      <button class="btn edit">Edit Status</button>
+      <button class="delete"><i class="fas fa-times"></i></button>
+    </div>
+    </div> -->
+ </div>
+ </div>
 
     <div class="modal" id="addBookModal">
       <div class="modal-box">
@@ -53,14 +66,14 @@
           required
           max="10000"
         />
-        <div class="is-read">
+        <div class="readStatus">
           <label for="is-read">Have you read it?</label>
           <input class="checkbox" type="checkbox" id="isRead" />
         </div>
         <button class="btn" type="submit">Submit</button>
       </form>
       </div>
-    </div>
-    <script src="script.js"></script>
+</div>
+    <script src="script.js" defer></script>
   </body>
 </html>
