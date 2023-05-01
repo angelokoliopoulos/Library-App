@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css">
+    <title>Lirabry Application</title>
+  </head>
+  <body>
+    <header>
+      <h1>Library </h1>
+      <button class="addBookBtn">
+        Add a Book
+      </button>
+    </header>
+    <div class="container">
+      <div  class="books"></div>
+    </div>
+
+    <div class="modal" id="addBookModal">
+      <div class="modal-box">
+      <form class="add-book-form" id="addBookForm">
+        <h3>Add new book</h3>
+        <input
+          class="input"
+          type="text"
+          id="title"
+          placeholder="Title"
+          required
+          maxlength="100"
+        />
+        <input
+          class="input"
+          type="text"
+          id="author"
+          placeholder="Author"
+          required
+          maxlength="100"
+        />
+        <input
+          class="input"
+          type="number"
+          id="pages"
+          placeholder="Pages"
+          required
+          max="10000"
+        />
+        <div class="is-read">
+          <label for="is-read">Have you read it?</label>
+          <input class="checkbox" type="checkbox" id="isRead" />
+        </div>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
