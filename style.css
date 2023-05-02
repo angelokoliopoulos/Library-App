@@ -13,17 +13,17 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #333;
-  background-color: #f4f4f4;
+  background-color: #f2f2f2;  
   overflow-x: hidden;
 }
 
 header {
   margin: 0  auto;
-  padding:1.5rem 0;
+  padding:1.5rem 3rem;
   display:flex;
   align-items: center;
-  background-color: white;
-
+  justify-content: space-between;
+  background-color:  #D4B4CB
 }
 
 .addBookBtn{
@@ -55,7 +55,7 @@ header {
 .modal-box {
   margin: 10% auto;
   width: 600px;
-  background-color: steelblue;
+  background-color:  #D4B4CB;
   color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -151,7 +151,9 @@ form label {
   font-size: 20px;
 
 }
-
+span{
+  margin-left:0.5rem;
+}
 .button-group{
   margin:0 auto;
 }
