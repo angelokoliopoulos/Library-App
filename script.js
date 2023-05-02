@@ -67,10 +67,10 @@ class Library {
     }
     this.addBookToDom(newBook);
     this.addBookToStorage(newBook);
+    this.closeModal();
   }
   displayStorageItems() {
     let booksFromStorage = JSON.parse(localStorage.getItem("books")) || [];
-
     booksFromStorage.forEach((book) => this.addBookToDom(book));
   }
 
@@ -85,13 +85,11 @@ class Library {
   removeFromStorage(book) {
     const bookTitle = book.querySelector("span").textContent;
     let booksFromStorage = JSON.parse(localStorage.getItem("books"));
-    const bookIndex = booksFromStorage.findIndex(
-      (book) => book.title === bookTitle
+
+    booksFromStorage = booksFromStorage.filter(
+      (book) => book.title !== bookTitle
     );
-    if (bookIndex !== -1) {
-      booksFromStorage.splice(bookIndex, 1);
-      localStorage.setItem("books", JSON.stringify(booksFromStorage));
-    }
+    localStorage.setItem("books", JSON.stringify(booksFromStorage));
   }
   bookExists(newbook) {
     let booksFromStorage = JSON.parse(localStorage.getItem("books")) || [];
@@ -112,9 +110,9 @@ class Library {
     div.innerHTML = `
 <div class="description">
 <h2>Title:<span>${book.title}</span></h2>
-<h3>Author:${book.author} </h3>
-<p>Pages:${book.pages} </p>
-<p>Read Status:${readStatus} </p>
+<h3>Author:<span>${book.author} </span></h3>
+<p>Pages:<span>${book.pages}</span> </p>
+<p>Read Status:<span>${readStatus}</span> </p>
 </div>
 <div class="button-group">
 <button class="btn edit">Edit Status</button>
@@ -126,7 +124,7 @@ class Library {
   }
 
   addListeners() {
-    const { addBookBtn, formBtn, deleteBtn } = getUIelements();
+    const { addBookBtn, formBtn } = getUIelements();
     formBtn.addEventListener("click", this.handleSubmit.bind(this));
     document.addEventListener(
       "DOMContentLoaded",
