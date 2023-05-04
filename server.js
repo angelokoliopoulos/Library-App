@@ -20,6 +20,8 @@ app.get("/", (req, res) => {
 const booksRouter = require("./routes/booksRouter");
 app.use("/api/user/books", booksRouter);
 
+const authRouter = require("./routes/signupRouter");
+app.use("api/auth", authRouter);
 //start function
 const start = async () => {
   try {
