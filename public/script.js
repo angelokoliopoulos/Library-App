@@ -1,3 +1,24 @@
+const apiUrl = "http://localhost:5000/api/user/books/";
+
+async function getBooks(id) {
+  let url = apiUrl;
+
+  if (id) {
+    url += encodeURIComponent(id);
+  }
+
+  const response = await axios.get(url);
+  return response.data.data;
+}
+
+async function postBook(data) {
+  try {
+    return axios.post(`${apiUrl}`, data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const getUIelements = () => {
   const addBookBtn = document.querySelector(".addBookBtn");
   let editStatus = document.querySelector(".edit");
@@ -53,52 +74,23 @@ class Library {
     e.preventDefault();
     const { bookTitle, bookAuthor, bookPages, isRead } = getUIelements();
 
-    console.log(bookAuthor, bookTitle, bookPages, isRead);
-
     if (!bookTitle || !bookAuthor) {
       alert("Some Book's Information Missing");
       return;
     }
 
     let newBook = new Book(bookAuthor, bookTitle, bookPages, isRead);
-    if (this.bookExists(newBook)) {
-      alert("Book already on the list");
-      return;
-    }
+    postBook(newBook);
     this.addBookToDom(newBook);
-    this.addBookToStorage(newBook);
     this.closeModal();
-  }
-  displayStorageItems() {
-    let booksFromStorage = JSON.parse(localStorage.getItem("books")) || [];
-    booksFromStorage.forEach((book) => this.addBookToDom(book));
   }
 
   removeBook(e) {
     if (e.target.matches("i")) {
       let book = e.target.parentElement.parentElement.parentElement;
       console.log(book);
-      this.removeFromStorage(book);
       book.remove();
     }
-  }
-  removeFromStorage(book) {
-    const bookTitle = book.querySelector("span").textContent;
-    let booksFromStorage = JSON.parse(localStorage.getItem("books"));
-
-    booksFromStorage = booksFromStorage.filter(
-      (book) => book.title !== bookTitle
-    );
-    localStorage.setItem("books", JSON.stringify(booksFromStorage));
-  }
-  bookExists(newbook) {
-    let booksFromStorage = JSON.parse(localStorage.getItem("books")) || [];
-    return booksFromStorage.some((book) => book.title === newbook.title);
-  }
-  addBookToStorage(book) {
-    let booksFromStorage = JSON.parse(localStorage.getItem("books")) || [];
-    if (this.bookExists) booksFromStorage.push(book);
-    localStorage.setItem("books", JSON.stringify(booksFromStorage));
   }
 
   addBookToDom(book) {
@@ -123,15 +115,19 @@ class Library {
     booksDiv.appendChild(div);
   }
 
+  async renderBooks() {
+    const books = await getBooks();
+    books.forEach((book) => {
+      this.addBookToDom(book);
+    });
+  }
+
   addListeners() {
     const { addBookBtn, formBtn } = getUIelements();
     formBtn.addEventListener("click", this.handleSubmit.bind(this));
-    document.addEventListener(
-      "DOMContentLoaded",
-      this.displayStorageItems.bind(this)
-    );
     addBookBtn.addEventListener("click", this.openModal.bind(this));
     window.addEventListener("click", this.outsideClick.bind(this));
+    document.addEventListener("DOMContentLoaded", this.renderBooks.bind(this));
   }
 }
 
