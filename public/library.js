@@ -1,7 +1,7 @@
 import BooksApi from "./booksApi.js";
 
 const getUIelements = () => {
-  const addBookBtn = document.querySelector(".addBookBtn");
+  const addBookBtn = document.getElementById("addBook");
   let editStatus = document.querySelector(".edit");
   let deleteBtn = document.querySelector(".delete");
   const booksDiv = document.querySelector(".books");
