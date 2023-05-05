@@ -28,7 +28,10 @@ class AxiosAPI {
 
   async loginUser(userData) {
     try {
-      const response = await axios.post(`${this._apiUrl}/login`, userData);
+      const response = await axios.post(
+        `${this._apiUrl}/api/auth/login`,
+        userData
+      );
       return response.data;
     } catch (error) {
       console.error(error);
