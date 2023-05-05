@@ -1,23 +1,16 @@
-import AxiosAPI from "../../services/axiosApi";
-
 const getUIelements = () => {
-  const addBookBtn = document.getElementById("addBook");
-  let editStatus = document.querySelector(".edit");
   let deleteBtn = document.querySelector(".delete");
   const booksDiv = document.querySelector(".books");
-  const formBtn = document.querySelector("form .btn");
   let bookTitle = document.getElementById("title").value;
   let bookAuthor = document.getElementById("author").value;
   let bookPages = document.getElementById("pages").value;
   let isRead = document.getElementById("isRead").checked;
 
   return {
-    addBookBtn,
     bookTitle,
     bookAuthor,
     bookPages,
     isRead,
-    formBtn,
     booksDiv,
     deleteBtn,
   };
@@ -33,9 +26,16 @@ function Book(author, title, pages, isRead) {
 class Library {
   constructor() {
     this.books = [];
-    this.div = document.querySelector(".container");
     this.modal = document.getElementById("addBookModal");
-    this.form = document.querySelector(".add-book-form");
+    this.addBookBtn = document.getElementById("addBook");
+    this.addBookBtn.addEventListener("click", this.renderModal.bind(this));
+  }
+
+  addListeners() {
+    const addBookForm = document.getElementById("addBookForm");
+    addBookForm.addEventListener("submit", this.handleSubmit.bind(this));
+    window.addEventListener("click", this.outsideClick.bind(this));
+    // document.addEventListener("DOMContentLoaded", this.renderBooks.bind(this));
   }
 
   openModal() {
@@ -44,6 +44,7 @@ class Library {
 
   closeModal() {
     this.modal.style.display = "none";
+    this.modal.innerHTML = "";
   }
   outsideClick(e) {
     if (e.target === this.modal) {
@@ -61,7 +62,7 @@ class Library {
     }
 
     let newBook = new Book(bookAuthor, bookTitle, bookPages, isRead);
-    AxiosAPI.postBook(newBook);
+    // AxiosAPI.postBook(newBook);
     this.addBookToDom(newBook);
     this.closeModal();
   }
@@ -91,7 +92,6 @@ class Library {
 <button class="btn edit">Edit Status</button>
 <button class="delete"><i class="fas fa-times"></i></button>
 </div>
-
 `;
     booksDiv.appendChild(div);
   }
@@ -103,15 +103,45 @@ class Library {
     });
   }
 
-  addListeners() {
-    const { addBookBtn, formBtn } = getUIelements();
-    formBtn.addEventListener("click", this.handleSubmit.bind(this));
-    addBookBtn.addEventListener("click", this.openModal.bind(this));
-    window.addEventListener("click", this.outsideClick.bind(this));
-    document.addEventListener("DOMContentLoaded", this.renderBooks.bind(this));
+  renderModal() {
+    console.log(this.modal);
+    this.modal.style.display = "block";
+    this.modal.innerHTML = `<div class="modal-box">
+    <form  id="addBookForm">
+      <h3>Add new book</h3>
+      <input
+        class="input"
+        type="text"
+        id="title"
+        placeholder="Title"
+        required
+        maxlength="100"
+      />
+      <input
+        class="input"
+        type="text"
+        id="author"
+        placeholder="Author"
+        required
+        maxlength="100"
+      />
+      <input
+        class="input"
+        type="number"
+        id="pages"
+        placeholder="Pages"
+        required
+        max="10000"
+      />
+      <div class="readStatus">
+        <label for="is-read">Have you read it?</label>
+        <input class="checkbox" type="checkbox" id="isRead" />
+      </div>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+    </div>`;
+    this.addListeners();
   }
 }
 
-const library = new Library();
-
-library.addListeners();
+export default Library;
