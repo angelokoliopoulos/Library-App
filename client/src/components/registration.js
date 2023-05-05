@@ -5,6 +5,8 @@ class Registration {
     this.modal = document.getElementById("registerModal");
     this.emailInput = document.getElementById("register-username");
     this.passwordInput = document.getElementById("register-password");
+    this.registerBtn = document.getElementById("registerBtn");
+    this.registerBtn.addEventListener("click", this.render.bind(this));
   }
 
   openModal() {

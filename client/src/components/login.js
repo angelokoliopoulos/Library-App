@@ -3,6 +3,10 @@ import AxiosAPI from "../services/axiosApi";
 class Login {
   constructor() {
     this.modal = document.getElementById("loginModal");
+    // this.emailInput = document.getElementById("login-username");
+    // this.passwordInput = document.getElementById("login-password");
+    this.loginBtn = document.getElementById("loginBtn");
+    this.loginBtn.addEventListener("click", this.render.bind(this));
   }
 
   openModal() {
@@ -18,8 +22,26 @@ class Login {
       this.closeModal();
     }
   }
+
+  async handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById("login-username").value;
+    const password = document.getElementById("login-password").value;
+    try {
+      const response = await AxiosAPI.loginUser({
+        email: email,
+        password: password,
+      });
+      console.log(`this is the response ${response}`);
+    } catch (error) {
+      console.error(error);
+    }
+
+    this.closeModal();
+  }
   addListeners() {
     const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", this.handleLogin.bind(this));
     window.addEventListener("click", this.outsideClick.bind(this));
   }
 
