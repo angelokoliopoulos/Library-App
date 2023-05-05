@@ -1,4 +1,4 @@
-import BooksApi from "./booksApi.js";
+import AxiosAPI from "../../services/axiosApi";
 
 const getUIelements = () => {
   const addBookBtn = document.getElementById("addBook");
@@ -61,7 +61,7 @@ class Library {
     }
 
     let newBook = new Book(bookAuthor, bookTitle, bookPages, isRead);
-    BooksApi.postBook(newBook);
+    AxiosAPI.postBook(newBook);
     this.addBookToDom(newBook);
     this.closeModal();
   }

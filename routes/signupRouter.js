@@ -1,14 +1,31 @@
 const express = require("express");
 const router = express.Router();
-// const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
-router.post("/signup", async (req, res) => {
+const User = require("../models/User");
+
+router.post("/signup", async (req, res, next) => {
+  const { email, password } = req.body;
+
   try {
-    const user = await User.create(req.body);
-    res.status(201).json({ success: true, data: user });
+    const user = await User.findOne({ email });
+
+    if (user) {
+      return res.status(400).json({ message: "Email already taken" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      email,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
+
+    res.json({ message: "User created" });
   } catch (error) {
-    res.status(500).json({ success: false, error: error });
+    next(error);
   }
 });
-
 module.exports = router;

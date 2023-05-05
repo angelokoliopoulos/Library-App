@@ -4,37 +4,44 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="style.css">
-    <title>Lirabry Application</title>
+    <title>Library Application</title>
   </head>
   <body>
     <header>
       <h1>Library </h1>
-      <button class="Btn" id="addBook">Add a Book</button>
-      <button class="Btn" id="register">Register</button>
+      <div class="btn-wrap">
+        <button class="Btn" id="addBook">Add a Book</button>
+        <button class="Btn" id="registerBtn">Register</button>
+        <button class="Btn" id="loginBtn">Log In</button>
+
+      </div>
     </header>
 <div class="container">
   <div  class="books">
  
  </div>
  </div>
-<div class="modal" id="registerModal">
-  <div class="modal-box"id="registerModalBox">
-    <form id="signup-form">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password">
-      <button type="submit" class="Btn" id="submit">Sign Up</button>
+ <div class="modal" id="registerModal">
+  <!-- <div class="modal-box"id="registerModalBox">
+    <form id="registerForm">
+      <label for="register-username">Username:</label>
+      <input type="text" id="register-username" name="username">
+      <label for="register-password">Password:</label>
+      <input type="password" id="register-password" name="password">
+      <button type="submit" class="Btn" >Sign Up</button>
     </form>
-  </div>
+  </div> -->
+</div>
+<div class="modal" id="loginModal">
+  <!-- <div class="modal-box"id="loginModalBox">
+    <form id="login-form">
+      <label for="login-username">Username:</label>
+      <input type="text" id="login-username" name="username">
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" name="password">
+      <button type="submit" class="Btn" id="submit">Log In</button>
+    </form>
+  </div> -->
 </div>
     <div class="modal" id="addBookModal">
       <div class="modal-box">
@@ -72,9 +79,6 @@
       </form>
       </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="library.js" type="module"  defer></script>
-    <script src="registration.js" type="module" defer></script>
 
   </body>
 </html>

@@ -91,7 +91,7 @@ header {
   padding : 20px ;
 }
 
-#submit{
+.modal button{
   margin:0.5rem auto;
 }
 form input
