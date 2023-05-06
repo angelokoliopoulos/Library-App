@@ -1,69 +1,26 @@
 import axios from "axios";
-
-class AxiosAPI {
+class BooksApi {
   constructor() {
-    this._apiUrl = "http://localhost:5000";
+    this._apiUrl = "http://localhost:5000/api/user/books/";
   }
-
-  async registerUser(userData) {
-    try {
-      const response = await axios.post(
-        `${this._apiUrl}/api/auth/signup`,
-        userData
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status === 400 &&
-        error.response.data.message === "Email already taken"
-      ) {
-        throw new Error("Email already taken");
-      }
-      console.error(error);
-      throw new Error("Failed to register user");
-    }
-  }
-
-  async loginUser(userData) {
-    try {
-      const response = await axios.post(
-        `${this._apiUrl}/api/auth/login`,
-        userData
-      );
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      throw new Error("Failed to login user");
-    }
-  }
-
   async getBooks(id) {
-    let url = `${this._apiUrl}/user/books`;
+    let url = this._apiUrl;
 
     if (id) {
-      url += `/${encodeURIComponent(id)}`;
+      url += encodeURIComponent(id);
     }
-
-    try {
-      const response = await axios.get(url);
-      return response.data.data;
-    } catch (error) {
-      console.error(error);
-      throw new Error("Failed to fetch books");
-    }
+    const response = await axios.get(url);
+    console.log(response.data.data);
+    return response.data.data;
   }
 
-  async postBook(bookData) {
+  async postBook(data) {
     try {
-      const response = await axios.post(`${this._apiUrl}/user/books`, bookData);
-      return response.data;
+      return axios.post(`${this._apiUrl}`, data);
     } catch (error) {
-      console.error(error);
-      throw new Error("Failed to add book");
+      console.log(error);
     }
   }
 }
 
-export default new AxiosAPI();
+export default new BooksApi();

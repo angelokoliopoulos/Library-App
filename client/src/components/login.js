@@ -1,12 +1,8 @@
-import AxiosAPI from "../services/axiosApi";
+// import BooksApi from "../services/axiosApi";
 
 class Login {
   constructor() {
     this.modal = document.getElementById("loginModal");
-    // this.emailInput = document.getElementById("login-username");
-    // this.passwordInput = document.getElementById("login-password");
-    this.loginBtn = document.getElementById("loginBtn");
-    this.loginBtn.addEventListener("click", this.render.bind(this));
   }
 
   openModal() {

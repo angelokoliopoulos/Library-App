@@ -1,10 +1,12 @@
+import BooksApi from "../services/axiosApi";
+
 const getUIelements = () => {
   let deleteBtn = document.querySelector(".delete");
   const booksDiv = document.querySelector(".books");
-  let bookTitle = document.getElementById("title").value;
-  let bookAuthor = document.getElementById("author").value;
-  let bookPages = document.getElementById("pages").value;
-  let isRead = document.getElementById("isRead").checked;
+  let bookTitle = document.getElementById("title");
+  let bookAuthor = document.getElementById("author");
+  let bookPages = document.getElementById("pages");
+  let isRead = document.getElementById("isRead");
 
   return {
     bookTitle,
@@ -15,7 +17,6 @@ const getUIelements = () => {
     deleteBtn,
   };
 };
-
 function Book(author, title, pages, isRead) {
   this.author = author;
   this.title = title;
@@ -25,7 +26,6 @@ function Book(author, title, pages, isRead) {
 
 class Library {
   constructor() {
-    this.books = [];
     this.modal = document.getElementById("addBookModal");
     this.addBookBtn = document.getElementById("addBook");
     this.addBookBtn.addEventListener("click", this.renderModal.bind(this));
@@ -62,7 +62,7 @@ class Library {
     }
 
     let newBook = new Book(bookAuthor, bookTitle, bookPages, isRead);
-    // AxiosAPI.postBook(newBook);
+    BooksApi.postBook(newBook);
     this.addBookToDom(newBook);
     this.closeModal();
   }
