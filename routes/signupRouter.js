@@ -5,10 +5,10 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 router.post("/signup", async (req, res, next) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
 
     if (user) {
       return res.status(400).json({ message: "Email already taken" });
