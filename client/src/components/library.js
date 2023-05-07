@@ -1,5 +1,4 @@
 import BooksApi from "../services/axiosApi";
-
 const getUIelements = () => {
   let deleteBtn = document.querySelector(".delete");
   const booksDiv = document.querySelector(".books");
@@ -61,7 +60,12 @@ class Library {
       return;
     }
 
-    let newBook = new Book(bookAuthor, bookTitle, bookPages, isRead);
+    let newBook = new Book(
+      bookAuthor.value,
+      bookTitle.value,
+      bookPages.value,
+      isRead.checked
+    );
     BooksApi.postBook(newBook);
     this.addBookToDom(newBook);
     this.closeModal();
