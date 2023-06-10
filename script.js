@@ -1,6 +1,5 @@
 const getUIelements = () => {
   const addBookBtn = document.querySelector(".addBookBtn");
-  let editStatus = document.querySelector(".edit");
   let deleteBtn = document.querySelector(".delete");
   const booksDiv = document.querySelector(".books");
   const formBtn = document.querySelector("form .btn");
@@ -115,7 +114,6 @@ class Library {
 <p>Read Status:<span>${readStatus}</span> </p>
 </div>
 <div class="button-group">
-<button class="btn edit">Edit Status</button>
 <button class="delete"><i class="fas fa-times"></i></button>
 </div>
 
