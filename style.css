@@ -139,7 +139,9 @@ form label {
 }
 
 .books .card {
+  text-align: center;
   position:relative;
+  max-width:600px;
   border-radius:12px;
   margin: 2rem 1rem;
   gap:20px;
